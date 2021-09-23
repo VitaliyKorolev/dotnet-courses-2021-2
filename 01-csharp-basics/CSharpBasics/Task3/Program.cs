@@ -20,9 +20,10 @@ namespace Task3
                 {
                     Console.Write(" ");
                 }
-                for (int j = 0; j<=i; j++)
+                for (int j = 0; j<=i*2; j++)
                 {
                     Console.Write("*");
+                   
                 }
                 Console.WriteLine();
             }  
