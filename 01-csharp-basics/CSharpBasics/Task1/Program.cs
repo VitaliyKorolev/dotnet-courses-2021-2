@@ -20,7 +20,7 @@ namespace Task1
                 Console.WriteLine("b должно быть больше 0");
                 b = Convert.ToDouble(Console.ReadLine());
             }
-            Console.WriteLine($"Площадь прямоугольника: {a * b} ");
+            Console.WriteLine(a * b);
         }
     }
 }
