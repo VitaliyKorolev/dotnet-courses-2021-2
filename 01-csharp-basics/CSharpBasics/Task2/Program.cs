@@ -7,12 +7,24 @@ namespace Task2
         static void Main(string[] args)
         {
             Console.WriteLine("Привет! Введите число N, большее 0");
-            int N = int.Parse(Console.ReadLine());
+            
+            if (!int.TryParse(Console.ReadLine(), out int N))
            
-            if (N <= 0)
+            {
+                Console.WriteLine("Wrong input");
+
+            }
+
+           
+            while (N <= 0)
             {
                 Console.WriteLine("N должно быть больше 0");
-                N = int.Parse(Console.ReadLine());
+                if (!int.TryParse(Console.ReadLine(), out  N))
+
+                {
+                    Console.WriteLine("Wrong input");
+
+                }
             }
             string s = "";
             for (int i = 0; i < N; i++)

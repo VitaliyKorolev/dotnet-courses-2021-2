@@ -9,7 +9,7 @@ namespace Task3
             Console.WriteLine("Привет! Введите число N, большее 0");
             int NumberOfLines = int.Parse(Console.ReadLine());
 
-            if (NumberOfLines <= 0)
+            while (NumberOfLines <= 0)
             {
                 Console.WriteLine("N должно быть больше 0");
                 NumberOfLines = Convert.ToInt32(Console.ReadLine());
