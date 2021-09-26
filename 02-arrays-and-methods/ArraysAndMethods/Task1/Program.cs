@@ -9,10 +9,11 @@ namespace Task1
             int[] A = GenerateArray();
             int MaxValue;
             int MinValue;
-            SortAndGetMinAndMaxValues(ref A, out MaxValue, out MinValue);
+            SortAndGetMinAndMaxValues(ref A, out MinValue, out MaxValue);
             PrintArray(A);
-            Console.WriteLine(MaxValue);
+            
             Console.WriteLine(MinValue);
+            Console.WriteLine(MaxValue);
         }
 
         static int[] GenerateArray()
@@ -32,7 +33,7 @@ namespace Task1
                 Console.WriteLine(x);
             }
         }
-        static void SortAndGetMinAndMaxValues(ref int[] mas, out int MaxVale, out int MinValue)
+        static void SortAndGetMinAndMaxValues(ref int[] mas,  out int MinValue, out int MaxVale)
         {
             int temp;
             for (int i = 0; i < mas.Length; i++)
