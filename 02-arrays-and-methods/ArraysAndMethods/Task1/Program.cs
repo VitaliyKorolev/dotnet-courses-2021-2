@@ -35,17 +35,19 @@ namespace Task1
         }
         static void SortAndGetMinAndMaxValues(ref int[] mas,  out int MinValue, out int MaxVale)
         {
-            int key;
-            for (int i = 1; i < mas.Length; i++)
+            int i = 0;
+            int tmp;
+            while (i < mas.Length)
             {
-                key = mas[i];
-                int j = i - 1;
-                while (j >= 0 && mas[j] > key)
+                if (i == 0 || mas[i - 1] <= mas[i])
+                    ++i;
+                else
                 {
-                    mas[j + 1] = mas[j];
-                    j = j - 1;
+                    tmp = mas[i];
+                    mas[i] = mas[i - 1];
+                    mas[i - 1] = tmp;
+                    --i;
                 }
-                mas[j + 1] = key;
             }
             MaxVale = mas[mas.Length - 1];
             MinValue = mas[0];
