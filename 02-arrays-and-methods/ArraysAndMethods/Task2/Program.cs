@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp1
+namespace Task2
 {
     class Program
     {
@@ -23,10 +23,10 @@ namespace ConsoleApp1
                 {
                     for (int k = 0; k < arr.GetUpperBound(2) + 1; k++)
                     {
-                        arr[i, j, k] = r.Next(-10,10);
+                        arr[i, j, k] = r.Next(-10, 10);
                     }
                 }
-                
+
             }
             return arr;
         }
@@ -41,15 +41,15 @@ namespace ConsoleApp1
 
         static void ReplacePositiveElementsWithZero(ref int[,,] arr)
         {
-           
-            
+
+
             for (int i = 0; i < arr.GetUpperBound(0) + 1; i++)
             {
                 for (int j = 0; j < arr.GetUpperBound(1) + 1; j++)
                 {
                     for (int k = 0; k < arr.GetUpperBound(2) + 1; k++)
                     {
-                       if( arr[i, j, k] > 0)
+                        if (arr[i, j, k] > 0)
                         {
                             arr[i, j, k] = 0;
                         }
@@ -57,8 +57,7 @@ namespace ConsoleApp1
                 }
 
             }
-           
+
         }
     }
-
 }
