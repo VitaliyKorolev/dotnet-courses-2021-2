@@ -29,7 +29,7 @@ namespace Task1
             return text;
 
         }
-        static double counter(string text)
+        static double Counter(string text)
         {
             int letters = 0;
             for (int i = 0; i < text.Length; i++)

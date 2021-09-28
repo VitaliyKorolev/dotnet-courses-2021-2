@@ -12,7 +12,7 @@ namespace Task5
             string target = "_";
             Regex regex = new Regex(pattern);
             string result = regex.Replace(s1, target);
-            Console.WriteLine(result);
+            Console.WriteLine("Результат замены: "+result);
         }
     }
 }
