@@ -6,10 +6,10 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            int[,,] A = GenerateArray();
-            PrintArray(A);
-            ReplacePositiveElementsWithZero(ref A);
-            PrintArray(A);
+            int[,,] a = GenerateArray();
+            PrintArray(a);
+            ReplacePositiveElementsWithZero( a);
+            PrintArray(a);
         }
 
 
@@ -39,7 +39,7 @@ namespace Task2
             Console.WriteLine();
         }
 
-        static void ReplacePositiveElementsWithZero(ref int[,,] arr)
+        static void ReplacePositiveElementsWithZero( int[,,] arr)
         {
 
 

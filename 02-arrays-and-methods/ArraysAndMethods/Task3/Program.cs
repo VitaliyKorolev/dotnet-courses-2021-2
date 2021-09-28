@@ -6,9 +6,9 @@ namespace Task3
     {
         static void Main(string[] args)
         {
-            int[] A = GenerateArray();
-            PrintArray(A);
-            Console.WriteLine(GetSumOfNonNegativeElements(A));
+            int[] a = GenerateArray();
+            PrintArray(a);
+            Console.WriteLine(GetSumOfNonNegativeElements(a));
         }
         static int[] GenerateArray()
         {
@@ -34,7 +34,7 @@ namespace Task3
             {
                 if (mas[i] > 0)
                 {
-                    sum = sum + mas[i];
+                    sum += mas[i];
                 }
                 
             }

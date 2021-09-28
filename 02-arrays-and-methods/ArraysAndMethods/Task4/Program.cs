@@ -6,9 +6,9 @@ namespace Task4
     {
         static void Main(string[] args)
         {
-            int[,] A = GenerateArray();
-            PrintArray(A);
-            Console.WriteLine(GetSumOfElementsOnEvenPositions(A));
+            int[,] a = GenerateArray();
+            PrintArray(a);
+            Console.WriteLine(GetSumOfElementsOnEvenPositions(a));
         }
 
         static int[,] GenerateArray()
@@ -44,7 +44,7 @@ namespace Task4
                     
                         if ((i+j) % 2 == 0)
                         {
-                            sum = sum +arr[i, j] ;
+                        sum += arr[i, j];
                         }
                     
                 }
