@@ -10,7 +10,7 @@ namespace Task1
             string text =Console.ReadLine();
             string text1= RemovePunctuation(text);
             Console.WriteLine(text1);
-            Console.WriteLine(counter(text1));
+            Console.WriteLine(Counter(text1));
 
         }
         static string RemovePunctuation(string text)
