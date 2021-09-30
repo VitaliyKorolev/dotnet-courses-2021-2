@@ -14,7 +14,7 @@ namespace Task7
         }
         static int TimeCounter(string s)
         {
-            Regex regex = new Regex(@"(\s|^)([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]");
+            Regex regex = new Regex(@"(\D|^)([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9](\D|$)");
             MatchCollection matches = regex.Matches(s);
             return matches.Count;
         }

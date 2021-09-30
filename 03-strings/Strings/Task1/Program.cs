@@ -6,8 +6,13 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите текстовую строку");
-            string text =Console.ReadLine();
+            string text = string.Empty;
+            while (text == "")
+            {
+                Console.WriteLine("Введите текстовую строку");
+                text = Console.ReadLine();
+            }
+           
             string text1= RemovePunctuation(text);
             Console.WriteLine(text1);
             Console.WriteLine(Counter(text1));

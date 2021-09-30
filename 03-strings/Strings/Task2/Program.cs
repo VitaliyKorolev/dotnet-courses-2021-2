@@ -15,20 +15,20 @@ namespace Task2
         }
         static string DoubleLetters(string s1, string s2)
         {
-            string s3 ="";
+            string answer = string.Empty;
             for (int i = 0; i < s1.Length; i++)
             {
                 if (s2.Contains(s1[i]))
                 {
-                    s3 = s3+ s1[i]+ s1[i];
+                    answer = answer+ s1[i]+ s1[i];
 
                 }
                 else
                 {
-                    s3 = s3 + s1[i];
+                    answer = answer + s1[i];
                 }
             }
-            return s3;
+            return answer;
 
 
         }

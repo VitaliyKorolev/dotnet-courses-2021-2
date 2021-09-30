@@ -8,11 +8,16 @@ namespace Task5
         {
             Console.WriteLine("Введите строку");
             string s1 = Console.ReadLine();
+            string result = ReplaceHTMLTags(s1);
+            Console.WriteLine("Результат замены: "+result);
+        }
+        static string ReplaceHTMLTags(string s)
+        {
             string pattern = @"<.+?>";
             string target = "_";
             Regex regex = new Regex(pattern);
-            string result = regex.Replace(s1, target);
-            Console.WriteLine("Результат замены: "+result);
+            string result = regex.Replace(s, target);
+            return result;
         }
     }
 }

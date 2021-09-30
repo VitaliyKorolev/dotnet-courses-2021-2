@@ -17,13 +17,18 @@ namespace Task3
 
         static void CultureComparison(CultureInfo cul1, CultureInfo cul2)
         {
-            Console.WriteLine("Date: " + DateTime.Now.ToString(cul1) + " Float: " + 1.35343.ToString(cul1));
-            Console.WriteLine("Date: " + DateTime.Now.ToString(cul2) + " Float: " + 1.35343.ToString(cul2));
+            PrintComparison(cul1);
+            PrintComparison(cul2);
         }
         static void CultureComparison(CultureInfo cul1)
         {
-            Console.WriteLine("Date: " + DateTime.Now.ToString(cul1) + " Float: " + 1.35343.ToString(cul1));
-            Console.WriteLine("Invariant Date: " + DateTime.Now.ToString(CultureInfo.InvariantCulture) + " Float: " + 1.35343.ToString(CultureInfo.InvariantCulture));
+            PrintComparison(cul1);
+            PrintComparison(CultureInfo.InvariantCulture);
+        }
+
+        static void PrintComparison(CultureInfo culture)
+        {
+            Console.WriteLine("Date: " + DateTime.Now.ToString(culture) + " Float: " + 1.35343.ToString(culture));
         }
     }
 

@@ -12,7 +12,7 @@ namespace Task6
         }
         static void CheckNumberFormat(string number)
         {
-            string patternOfExp = @"(-?\d+)\.?\d+(e-|e\+|e)\d+";
+            string patternOfExp = @"(-?\d+)(\.?\d+)?(e-|e\+|e)\d+";
             string pattern = @"(\s|^)(-?\d+)\.?\d*(\s|$)";
             if (Regex.IsMatch(number, patternOfExp, RegexOptions.IgnoreCase))
             {
