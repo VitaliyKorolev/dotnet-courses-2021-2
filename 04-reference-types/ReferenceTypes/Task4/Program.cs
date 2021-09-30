@@ -10,9 +10,9 @@ namespace Task4
             MyString s1 = new MyString();
             char[] a = { 'a', 'b', 'c', 'd' };
             MyString s2 = new MyString(a);
-            string s3 = s2.MyToString();
+            string s3 = s2.ToString();
             Console.WriteLine(s3);
-            Console.WriteLine(s.MyToString());
+            Console.WriteLine(s.ToString());
             MyString billy = new MyString("jh");
             s= s - billy;
         }
@@ -37,7 +37,7 @@ namespace Task4
                     str[i] = arr[i];
                 }
             }
-            public string MyToString()
+            public string ToString()
             {
                 string res = string.Empty;
                 for (int i = 0; i < str.Length; i++)
@@ -48,7 +48,7 @@ namespace Task4
             }
             public static MyString operator +(MyString s1, MyString s2)
             {
-               string res= s1.MyToString() + s2.MyToString();
+               string res= s1.ToString() + s2.ToString();
 
                 MyString sumstr = new MyString(res); 
                 return sumstr;
@@ -63,8 +63,8 @@ namespace Task4
             }
             public static MyString operator -(MyString s1, MyString s2)
             {
-                string s3 = s1.MyToString();
-                string s4 = s2.MyToString();
+                string s3 = s1.ToString();
+                string s4 = s2.ToString();
                 s3.Replace(s4, "");
                 MyString minstr = new MyString(s3.Replace(s4, ""));
                 return minstr;
