@@ -15,14 +15,18 @@ namespace Task4
             Console.WriteLine(s.ToString());
             MyString billy = new MyString("jh");
             s= s - billy;
+            Console.WriteLine(s.ToString());
+            s = s + s2;
+            Console.WriteLine(s.ToString());
+
         }
 
         class MyString
         {
-            public char[] str;
+            private char[] str;
             public  MyString()
             {
-                str = new char[1];
+                str = null;
             }
             public MyString(string s)
             {
