@@ -43,10 +43,22 @@ namespace Task1
             public User(DateTime date, string name, string lastname, string patronymic)
             {
                 if (date.Year > 2020 || date.Year < 1900) { throw new Exception("Недопустимая дата рождения"); }
+                if (String.IsNullOrEmpty(name))
+                {
+                    throw new ArgumentException("Неверное имя пользователя");
+                }
+                if (String.IsNullOrEmpty(lastname))
+                {
+                    throw new ArgumentException("Неверная фамилия пользователя");
+                }
+                if (String.IsNullOrEmpty(patronymic))
+                {
+                    throw new ArgumentException("Неверное отчество пользователя");
+                }
                 this.dateofbirth = date;
-                this.name = name;
-                this.lastname = lastname;
-                this.patronymic = patronymic;
+                Name = name;
+                LastName = lastname;
+                Patronymic = patronymic;
                 age = DateTime.Now.Year - date.Year;
                 if (DateTime.Now.Month < date.Month || (DateTime.Now.Month == date.Month && DateTime.Now.Day < date.Day)) age--;
             }

@@ -11,7 +11,6 @@ namespace Task2
             Console.WriteLine($"Длина окружности : {round1.Circumference}");
             Console.WriteLine(round1.Y);
             
-            
         }
 
         class Round
