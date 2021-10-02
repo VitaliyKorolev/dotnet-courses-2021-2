@@ -6,23 +6,16 @@ namespace Task4
     {
         static void Main(string[] args)
         {
-            MyString s= new MyString("jhfgggjh");
-            MyString s1 = new MyString();
+           
             char[] a = { 'a', 'b', 'c', 'd' };
             MyString s2 = new MyString(a);
-            string s3 = s2.ToString();
-            Console.WriteLine(s3);
-            Console.WriteLine(s.ToString());
-            MyString billy = new MyString("jh");
-            s= s - billy;
-            s[1] = 'l';
-            Console.WriteLine(s.ToString());
-            s = s + s2;
-            s1 = new MyString("abcd");
+
+         
+            MyString s1 = new MyString("abcd");
            
            
-            Console.WriteLine(s.ToString());
-            Console.WriteLine(s1== s2);
+          
+            Console.WriteLine(null != s1);
 
         }
 
@@ -75,12 +68,19 @@ namespace Task4
             }
             public static bool operator ==(MyString s1, MyString s2)
             {
-                
-               return (!ReferenceEquals(null, s2)&&!ReferenceEquals(s1, null)) && s1.Str.ToString() == s2.Str.ToString();
+                if((s1 is null && s2 is object) || ( s1 is object && s2 is null))
+                {
+                    return false;
+                }
+                else
+                {
+                    return string.Equals(s1.ToString(), s2.ToString());
+                }
+               
             }
             public static bool operator !=(MyString s1, MyString s2)
             {
-                return !(s1 == s2);
+                return !(s1==s2);
             }
             public static MyString operator -(MyString s1, MyString s2)
             {
