@@ -9,8 +9,6 @@ namespace Task3
             Triangle t1 = new Triangle(5, 4, 3);
             Console.WriteLine(t1.GetPerimetr());
             Console.WriteLine(t1.GetArea());
-                
-            
         }
 
         class Triangle
@@ -18,7 +16,6 @@ namespace Task3
             private int a;
             private int b;
             private int c;
-            
             public int A 
             {
                 get { return a; }
@@ -50,7 +47,6 @@ namespace Task3
             {
                 if (a + b <= c || a + c <= b || b + c <= a) { throw new Exception("Не существует треугольника с такими сторонами"); }
                 A = a; B = b; C = c;
-
 
             } 
             public int GetPerimetr()

@@ -13,27 +13,27 @@ namespace Task2
             
         }
 
-        class Round
+        public class Round
         {
-            public int Radius { get;  }
+            public int Radius { get; }
             public int X { get; set; }
             public int Y { get; set; }
-            public double Circumference { get; }
-            public double Area { get; }
+            public virtual double Circumference
+            {
+                get { return 2 * Math.PI * Radius; }
+            }
+            public virtual double Area
+            {
+                get { return Math.PI * Radius * Radius; }
+            }
 
             public Round(int r, int x, int y)
             {
-                if(r<=0) { throw new Exception("Недопустимый радиус окружности"); }
+                if (r <= 0) { throw new Exception("Недопустимый радиус окружности"); }
                 Radius = r;
                 X = x;
                 Y = y;
-                Circumference = 2 * Math.PI * r;
-                Area = Math.PI * r * r;
             }
-            
-
-
-
         }
     }
 }
