@@ -22,6 +22,7 @@ namespace Task1
             Console.WriteLine(ring.Circumference);
             Console.WriteLine(circle.Circumference);
             Console.WriteLine(round.Radius);
+            
         }
     }
     class Figure

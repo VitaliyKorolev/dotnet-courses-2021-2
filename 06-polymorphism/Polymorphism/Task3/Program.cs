@@ -10,9 +10,9 @@ namespace Task3
             double b = ser1[3];
             List<double> n = new List<double> { 1, 2, 3, 4, 5 };
             IIndexableSeries ser2 = new List(n);
-            PrintIndexable(ser2, 5);
-
+            PrintIndexable(ser2, 10);
             PrintIndexable(ser1, 10);
+
         }
         public interface ISeries
         {
@@ -42,7 +42,8 @@ namespace Task3
             }
             public bool MoveNext()
             {
-                index++; return true;
+                index++; 
+                return true;
             }
             public void Reset()
             {
@@ -51,7 +52,7 @@ namespace Task3
         }
         class List : IIndexableSeries
         {
-            public List <double> numbers = new List<double>();
+            private List <double> numbers = new List<double>();
             int index=0;
             public double this[int i] { get { return numbers[i]; } }
             public List(List <double> n)
@@ -64,7 +65,8 @@ namespace Task3
             }
             public bool MoveNext()
             {
-                index++; return true;
+                index = index < numbers.Count - 1 ? index + 1 : 0;
+                return true;
             }
             public void Reset()
             {
