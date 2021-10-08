@@ -7,7 +7,7 @@ namespace Task2
         static void Main(string[] args)
         {
             GeometricalProgression ser1 = new GeometricalProgression(1, 2);
-            ISeries ser2= (ISeries) ser1;
+            
             PrintSeries(ser1, 10);
            
         }
@@ -19,7 +19,9 @@ namespace Task2
         }
         class GeometricalProgression : ISeries
         {
-            double start, step;int index;
+            private double start;
+            private double step;
+            private int index;
             public GeometricalProgression(double start, double step)
             {
                 this.start = start;
@@ -32,7 +34,8 @@ namespace Task2
             }
             public bool MoveNext()
             {
-                index++; return true;
+                index++; 
+                return true;
             }
             public void Reset()
             {

@@ -8,13 +8,27 @@ namespace Task1
         {
             int[] a = { 3, 5, 8, 10, };
             DynamicArray<int> masint = new DynamicArray<int>(a);
-   
+            masint.Add(101);
+            masint.PrintArray();
+
             masint.RemoveAt(2);
-            int adfh=  masint[2];
-            double[] b = { 3, 5, 8, 10, };
-            DynamicArray<double> mas1 = new DynamicArray<double>(5);
+            masint.PrintArray();
+
+            int[] b = { 3, 5, 8, 10, 11};
+            masint.AddRange(b);
+            masint.PrintArray();
+
+            masint.Insert(0, 228);
+            masint.PrintArray();
+
+            masint.RemoveAt(0);
+            masint.PrintArray();
+
+            DynamicArray <double> mas1 = new DynamicArray<double>(5);
             int afaf= mas1.Capacity;
         }
+
+       
     }
     class DynamicArray<T> where T : new()
     {
@@ -46,7 +60,6 @@ namespace Task1
                 }
             }
         }
-
         public int Length   //// количество элементов в массиве 
         {
             get;
@@ -54,11 +67,8 @@ namespace Task1
         }
         public  DynamicArray()
         {
-            arr = new T[8];
-            for(int i=0; i< 8; i++ )
-            {
-                arr[i] = default(T);
-            }
+            const int BaseCapacity=8;
+            arr = new T[BaseCapacity];
             Length = 0;
         }
         public DynamicArray  (int n)
@@ -69,35 +79,27 @@ namespace Task1
             }
 
             arr = new T[n];
-            Length = n;
+            Length = 0;
         }
-        public DynamicArray(T[] a)
+        public DynamicArray(T[] array)
         {
-            arr=a;
-            
-            Length = a.Length;
-
+            arr = (T[])array.Clone();
+            Length = array.Length;
         }
        
         public void Add(T item)
         {
-            if (arr.Length == Length)
+            if (Capacity == Length)
             {
-                int newLength = arr.Length * 2;
-                T[] newArray = new T[newLength];
-                arr.CopyTo(newArray, 0);
-                arr = newArray;
+                GrowArray(Capacity * 2); 
             }
             arr[Length++] = item;
         }
         public void AddRange(T[] items)
         {
-            if (arr.Length < Length + items.Length)
+            if (Capacity < Length + items.Length)
             {
-                int newLength = Length+items.Length;
-                T[] newArray = new T[newLength];
-                arr.CopyTo(newArray, 0);
-                arr = newArray;
+                GrowArray(Length+items.Length);
             }
             items.CopyTo(arr, Length);
             Length = Length + items.Length;
@@ -109,18 +111,12 @@ namespace Task1
                 throw new IndexOutOfRangeException();
             }
 
-            if (arr.Length == Length)
+            if (Capacity == Length)
             {
-                int newLength = arr.Length * 2;
-                T[] newArray = new T[newLength];
-                arr.CopyTo(newArray, 0);
-                arr = newArray;
+                GrowArray(Capacity * 2);
             }
-
             Array.Copy(arr, index, arr, index + 1, Length - index);
-
             arr[index] = item;
-
             Length++;
         }
         public bool RemoveAt(int index)
@@ -139,8 +135,20 @@ namespace Task1
             Length--;
             return true;
         }
+        private void GrowArray(int newLength)
+        {
+            T[] newArray = new T[newLength];
+            arr.CopyTo(newArray, 0);
+            arr = newArray;
+        }
+        public  void PrintArray()
+        {
+            for (int i = 0; i < Length; i++)
+            {
+                Console.Write(arr[i] + " ");
 
-
-
+            }
+            Console.WriteLine();
+        }
     }
 }

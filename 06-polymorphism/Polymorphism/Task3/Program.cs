@@ -21,11 +21,11 @@ namespace Task3
             void Reset();
             
         }
-        public interface IIndexable:ISeries
+        public interface IIndexable
         {
-           public double this[int i] { get; }
+            double this[int i] { get; }
         }
-        interface IIndexableSeries: IIndexable { }
+        interface IIndexableSeries: IIndexable, ISeries { }
         public class ArithmeticalProgression : IIndexableSeries
         {
             double start, step; int index;
@@ -84,11 +84,11 @@ namespace Task3
         }
         public static void PrintIndexable(IIndexable series, int n)
         {
-            series.Reset();
+            
             for (int i = 0; i < n; i++)
             {
-                Console.WriteLine(series.GetCurrent());
-                series.MoveNext();
+                Console.WriteLine(series[i]);
+                
             }
         }
 

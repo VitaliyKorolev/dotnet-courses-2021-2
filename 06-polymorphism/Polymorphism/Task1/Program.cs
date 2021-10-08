@@ -21,13 +21,19 @@ namespace Task1
             Ring ring = (Ring)fig[3];
             Console.WriteLine(ring.Circumference);
             Console.WriteLine(circle.Circumference);
-            Console.WriteLine(round.Radius);
+            
+           
+            
             
         }
     }
-    class Figure
+    abstract class  Figure
     {
-        public virtual void Draw() { }
+        public abstract void Draw();
+    }
+    abstract class  Triangle : Figure
+    {
+
     }
     class Rectangle:Figure
     {

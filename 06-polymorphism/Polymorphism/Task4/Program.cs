@@ -21,22 +21,22 @@ namespace Task4
     {
         int width;
         int height;
-        int[,] objectsCoordinates;
+        GameObject[] objects;
         
     }
-    class Coordinates : GameMap
+    abstract class GameObject 
     {
         protected int x;
         protected int y;
     }
-    class Bonus:Coordinates, IDistract
+    class Bonus:GameObject, IDistract
     {
         public void Distract() { }
         public void RandomGenerate() { }
     }
     class EnergyDrink : Bonus { }
     class Humburger : Bonus { }
-    class Monsters : Coordinates, IMove, IDistract
+    class Monsters : GameObject, IMove, IDistract
     {
         public void Distract() { }
         public void FightWithPlayer() { }
@@ -44,7 +44,7 @@ namespace Task4
     }
     class Bears : Monsters { }
     class Wolves : Monsters { }
-    class Player:Coordinates, IMove
+    class Player: GameObject, IMove
     {
         int[] characteristics;
         public void Move() { }
