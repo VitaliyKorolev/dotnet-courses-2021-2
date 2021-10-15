@@ -7,7 +7,7 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            List<int> list1 = new List<int> { 1, 2, 3, 4};
+            List<int> list1 = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
             LinkedList<string> list2 = new LinkedList<string>();
             list2.AddLast("Vanya");
             list2.AddLast("Bogdan");
@@ -22,27 +22,20 @@ namespace Task1
         }
         static void RemoveEachSecondItem <T> ( ICollection<T> collection)  
         {
-            while (collection.Count != 1)
+            
+            while ( collection.Count!=1)
             {
-                List<T> delete = new List<T>();
                 var a = collection.GetEnumerator();
-                int count = 0;
-                while (a.MoveNext())
-                {
-                    count++;
-                    
-                    if (count % 2 == 0)
-                    {
-                        delete.Add(a.Current);
-                    }
-                }
-                foreach(T del in delete)
-                {
-                    collection.Remove(del);
-                }
-
+                a.MoveNext();
+                var temp = a.Current;
+                collection.Remove(a.Current);
+                collection.Add(temp);
+                var b = collection.GetEnumerator();
+                b.MoveNext();
+                collection.Remove(b.Current);
             }
             
+
         }
         static void Print<T>(ICollection<T> collection)
         {
