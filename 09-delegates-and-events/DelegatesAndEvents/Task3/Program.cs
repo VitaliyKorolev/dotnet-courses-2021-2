@@ -8,6 +8,7 @@ namespace Task3
         static void Main(string[] args)
         {
             void Print(object sender, EventArgs e) { Console.WriteLine("Сортировка закончилась"); };
+
             string[] s1 = new string[] { "aa", "baqqfgjfj", "abcd", "abch" };
             string[] s2 = new string[] { "aa", "baq", "ahhhhhh", "aqwqwr" };
             Compare compare = CompareStrings;
@@ -16,6 +17,8 @@ namespace Task3
             Thread th1 = SortAsync(s2, compare);
             th1.Start();
 
+
+            SortEnded += null;
             Sort(s1, compare);
             
             
@@ -59,7 +62,7 @@ namespace Task3
                 }
             }
 
-            SortEnded?.Invoke( EventArgs.Empty, EventArgs.Empty);
+            SortEnded?.Invoke( null, EventArgs.Empty);
         }
         public static Thread SortAsync(string[] mas, Compare compare)
         {
@@ -68,5 +71,6 @@ namespace Task3
             return th;
 
         }
+
     }
 }

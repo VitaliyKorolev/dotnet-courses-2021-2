@@ -17,6 +17,7 @@
             office.Leave(person2);
             office.Leave(person1);
 
+            office.Come(person1);
 
 
         }

@@ -8,6 +8,12 @@ namespace Task2
         {
             public string Name { get; set; }
             public DateTime Time { get; set; }
+
+            public OfficeEventArgs(string name, DateTime time)
+            {
+                Name = name;
+                Time = time;
+            }
         }
     }
 }

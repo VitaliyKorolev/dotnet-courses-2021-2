@@ -15,7 +15,7 @@ namespace Task2
             {
                 if(args.Time.Hour<=12)
                    Console.WriteLine($"Доброе утро,{args.Name}!, - сказал {this.Name}");
-
+                
                 if (args.Time.Hour >= 17)
                     Console.WriteLine($"Добрый вечер,{args.Name}!, - сказал {this.Name}");
 

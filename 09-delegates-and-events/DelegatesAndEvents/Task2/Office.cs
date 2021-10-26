@@ -15,7 +15,8 @@ namespace Task2
             public event EventHandler<OfficeEventArgs> PersonLeft;
             public void Come(Person person)
             {
-                OfficeEventArgs args = new OfficeEventArgs() { Name = person.Name, Time = DateTime.Now };
+                if (employeesList.Contains(person) ) { throw new Exception("В данный момент в офисе уже есть этот работник"); }
+                OfficeEventArgs args = new OfficeEventArgs(person.Name, DateTime.Now);
                 Console.WriteLine($"На работу пришел {person.Name}");
 
                 employeesList.Add(person);
@@ -26,9 +27,9 @@ namespace Task2
             }
             public void Leave(Person person)
             {
-                if (employeesList.Contains(person)==false) { throw new Exception("В данный момент в офисе нет такого работника"); }
+                if (!employeesList.Contains(person)) { throw new Exception("В данный момент в офисе нет такого работника"); }
 
-                OfficeEventArgs args = new OfficeEventArgs() { Name = person.Name, Time = DateTime.Now };
+                OfficeEventArgs args = new OfficeEventArgs(person.Name, DateTime.Now);
                 Console.WriteLine($" {person.Name} ушел домой");
                 employeesList.Remove(person);
 

@@ -6,7 +6,7 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            string[] s = new string[] { "aa", "baqqfgjfj", "abcd", "abch" };
+            string[] s = new string[] { "aa", "b", "abcd", "abch" };
             Compare compare = CompareStrings;
             Sort(s, compare);
             foreach(string el in s)
@@ -19,10 +19,12 @@ namespace Task1
             
             if (s1.Length == s2.Length)
             {
+                char[] arr1 = s1.ToCharArray();
+                char[] arr2 = s2.ToCharArray();
                 for (int i = 0; i < s1.Length ; i++)
                 {
-                    if (s1.ToCharArray()[i] < s2.ToCharArray()[i]) return -1;
-                    if (s1.ToCharArray()[i] > s2.ToCharArray()[i]) return 1;
+                    if (arr1[i] < arr2[i]) return -1;
+                    if (arr1[i] > arr2[i]) return 1;
                 }
                 return 0;
             }
