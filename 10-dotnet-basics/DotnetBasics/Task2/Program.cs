@@ -14,11 +14,10 @@ namespace Task2
             DateTime dateofhiring1 = new DateTime(2010, 03, 15);
             Employee emp1 = new Employee(dateofbirth1, "valeriy", "baranov", "andreevich", "SMM", dateofhiring1);
 
-            Object o = new Object();
 
             User user = new User(dateofbirth, "valeriy", "baranov", "andreevich");
 
-            bool b= emp.Equals(user);
+            bool b= emp.Equals((Object)null);
             Console.WriteLine(b);
         }
     }

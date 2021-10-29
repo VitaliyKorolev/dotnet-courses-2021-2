@@ -2,7 +2,7 @@
 
 namespace Task3
 {
-    class TwoDPoint : Object
+    class TwoDPoint 
 	{
 		public readonly int x, y;
 

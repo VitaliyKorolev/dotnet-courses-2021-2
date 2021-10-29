@@ -33,6 +33,8 @@ namespace Task2
 
         public bool Equals(Employee emp)
         {
+            if (ReferenceEquals(null, emp)) return false;
+            if (ReferenceEquals(this, emp)) return true;
             return this.Age == emp.Age &&
                 this.Name == emp.Name &&
                 this.LastName == emp.LastName &&
