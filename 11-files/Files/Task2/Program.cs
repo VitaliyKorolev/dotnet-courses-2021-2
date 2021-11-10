@@ -9,8 +9,8 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            Git g = new Git(@"C:/Users/user/Desktop/texts", $"C:/Users/user/Desktop/temp/");
-            DateTime backuptime = new DateTime(2021, 10, 29, 15, 22, 00);
+            Git g = new Git(@"C:/Users/user/Desktop/texts", $"C:/Users/user/Desktop/temp");
+            
             g.Run();
 
         }
@@ -30,7 +30,7 @@ namespace Task2
             }
             public  void Run()
             {
-                CopyToTemp();
+                CopyTextToTemp();
 
 
                 watcher.NotifyFilter = NotifyFilters.DirectoryName
@@ -53,8 +53,8 @@ namespace Task2
                 {
                     watcher.EnableRaisingEvents = false;      // выключаем наблюдение
 
-                    Console.WriteLine("Enter date in  dd.MM.yyyy HH mm s format");
-                    DateTime dateTime = DateTime.ParseExact(Console.ReadLine(), "dd.MM.yyyy HH mm s", CultureInfo.InvariantCulture);
+                    Console.WriteLine("Enter date in  \"dd.MM.yyyy HH mm ss\" format");
+                    DateTime dateTime = DateTime.ParseExact(Console.ReadLine(), "dd.MM.yyyy HH mm ss", CultureInfo.InvariantCulture);
 
                     BackUp(dateTime);
                 }
@@ -64,14 +64,14 @@ namespace Task2
             private void OnRenamed(object sender, RenamedEventArgs e)
             {
                 Console.WriteLine($"Renamed: from {e.OldFullPath} to {e.FullPath}");
-                CopyToTemp();
+                CopyTextToTemp();
             }
 
             private void OnDeleted(object sender, FileSystemEventArgs e)
             {
                 
                 Console.WriteLine($"Deleted: {e.FullPath}");
-                CopyToTemp();
+                CopyTextToTemp();
 
             }
 
@@ -89,7 +89,7 @@ namespace Task2
                         return;
                     }
 
-                    CopyToTemp();
+                    CopyTextToTemp();
 
                     Console.WriteLine($"Changed: {e.FullPath}");
 
@@ -102,13 +102,23 @@ namespace Task2
 
             }
 
-            private void CopyToTemp()    // копируем в папку с названием времени
+            private void CopyTextToTemp()    // копируем в папку с названием времени
             {
                 DateTime time = DateTime.Now;
-                string s = $" { time.ToShortDateString() } { time.Hour} {time.Minute} {time.Second}";  
-                string fromDirectory = directoryToWatch;
-                string toDirectory = tempDirectory + s;
-                Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(fromDirectory, toDirectory);
+                string s = time.ToString("dd.MM.yyyy HH mm ss");
+                string SourcePath = directoryToWatch;
+                string DestinationPath = Path.Combine(tempDirectory, s);
+
+                if (!Directory.Exists(DestinationPath))
+                {
+                    Directory.CreateDirectory(DestinationPath);
+                }
+
+                foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))  //создание дерева каталогов в папке temp/date
+                    Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
+
+                foreach (string newPath in Directory.GetFiles(SourcePath, "*.txt", SearchOption.AllDirectories))   //копирование текстовых файлов в папку temp/date
+                    File.Copy(newPath, newPath.Replace(SourcePath, DestinationPath), true);
             }
             public void BackUp(DateTime backuptime)
             {
@@ -120,8 +130,8 @@ namespace Task2
                 int i = 0;
                 foreach (var d in subdirs)
                 {
-                    Console.WriteLine(d.Name);
-                    dates[i] = DateTime.ParseExact(d.Name, " dd.MM.yyyy HH mm s", CultureInfo.InvariantCulture);
+                    
+                    dates[i] = DateTime.ParseExact(d.Name, "dd.MM.yyyy HH mm ss", CultureInfo.InvariantCulture);
                     i++;
                 }
                 DateTime[] selectedTimes = dates.Where(t => t <= backuptime).ToArray();
@@ -132,13 +142,18 @@ namespace Task2
                 }
 
                 DateTime backup = selectedTimes[selectedTimes.Length - 1];
-                string backupdate = backup.ToString(" dd.MM.yyyy HH mm s");
+                string backupdate = backup.ToString("dd.MM.yyyy HH mm ss");
 
-                string fromDirectory = tempDirectory + backupdate;
+                Console.WriteLine($"Date of backup {backupdate}");
+
+                string fromDirectory = Path.Combine(tempDirectory, backupdate);
                 string toDirectory = directoryToWatch;
 
-                Directory.Delete(toDirectory, true);
-                Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(fromDirectory, toDirectory);
+                foreach (string textFile in Directory.GetFiles(directoryToWatch, "*.txt", SearchOption.AllDirectories)) // удаление текстовых файлов в папке наблюдения
+                    File.Delete(textFile);
+
+                foreach (string newPath in Directory.GetFiles(fromDirectory, "*.txt", SearchOption.AllDirectories))
+                    File.Copy(newPath, newPath.Replace(fromDirectory, toDirectory), true);
             }
         }
     }
