@@ -12,6 +12,7 @@ namespace Task1
 {
     public partial class MainForm : Form
     {
+
         protected BindingList<User> _users = new BindingList<User>
         {
             new User( DateTime.Now.Date.AddYears(-10), "Andrey", "Gysev"),
@@ -29,41 +30,20 @@ namespace Task1
         public MainForm()
         {
             InitializeComponent();
-
+            
             _revards.AllowEdit = true;
             _users.AllowEdit = true;
 
             dgvUsers.DataSource = _users;
             dgvRevards.DataSource = _revards;
-         
+
             dgvUsers.Columns[5].Visible = false;
             dgvRevards.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvRevards.ReadOnly = true;
             dgvUsers.ReadOnly = true;
             this.MinimumSize = new Size(800, 400);
- 
-            btnDelete.Enabled = false;
-            btnEdit.Enabled = false;       
-        }
-
-        private void dgvUsers_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            dgvUsers.ClearSelection();
-            dgvUsers.Rows[e.RowIndex].Selected = true;
-
-            btnDelete.Enabled = true;
-            btnEdit.Enabled = true;
-
-        }
-
-        private void dgvReavards_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            dgvRevards.ClearSelection();
-            dgvRevards.Rows[e.RowIndex].Selected = true;
-
-            btnDelete.Enabled = true;
-            btnEdit.Enabled = true;
+     
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -71,21 +51,15 @@ namespace Task1
             if (tabControl1.SelectedTab == tabPage2)
             {
                 Revard item = (Revard)dgvRevards.SelectedRows[0].DataBoundItem;     
-                int indexOfRevard = _revards.IndexOf(item);
-
-                EditFormRevard editFormRevard = new EditFormRevard(_revards[indexOfRevard], "Edit");
+                EditFormRevard editFormRevard = new EditFormRevard(item);
                 editFormRevard.ShowDialog();
-                _revards[indexOfRevard] = editFormRevard.revard;
- 
                 _revards.ResetBindings();
             }
             else if(tabControl1.SelectedTab == tabPage1)
             {
                 User item = (User)dgvUsers.SelectedRows[0].DataBoundItem;
-                int indexOfUser = _users.IndexOf(item);
-                EditFormUser editFormUser = new EditFormUser("Edit", _revards, _users[indexOfUser]);
+                EditFormUser editFormUser = new EditFormUser( _revards, item);
                 editFormUser.ShowDialog();
-                _users[indexOfUser] = editFormUser.user;
                 _revards.ResetBindings();
             }
             
@@ -93,6 +67,8 @@ namespace Task1
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+
+            
             if (tabControl1.SelectedTab == tabPage2)
             {
                 DeleteForm deleteForm = new DeleteForm();
@@ -113,7 +89,7 @@ namespace Task1
                 }
             }
             else if (tabControl1.SelectedTab == tabPage1)
-            {
+            {        
                 DeleteForm deleteForm = new DeleteForm();
                 deleteForm.ShowDialog();
 
@@ -131,7 +107,7 @@ namespace Task1
         {
             if (tabControl1.SelectedTab == tabPage2)
             {
-                EditFormRevard editFormRevard = new EditFormRevard("Add");
+                EditFormRevard editFormRevard = new EditFormRevard();
                 editFormRevard.ShowDialog();
                 if (editFormRevard.DialogResult == DialogResult.OK)
                 {
@@ -142,7 +118,7 @@ namespace Task1
             }
             else if (tabControl1.SelectedTab == tabPage1)
             {
-                EditFormUser editFormUser = new EditFormUser("Add", _revards);
+                EditFormUser editFormUser = new EditFormUser( _revards);
                 editFormUser.ShowDialog();
 
                 if (editFormUser.DialogResult == DialogResult.OK)
@@ -187,7 +163,7 @@ namespace Task1
             }
             if (col == "Revards")
             {
-                sortedListInstance = new BindingList<User>(_users.OrderBy(x => x.Revards).ToList());
+                sortedListInstance = new BindingList<User>(_users.OrderBy(x => x.RevardsAsString).ToList());
                 _users = sortedListInstance;
             }
             dgvUsers.DataSource = _users;
@@ -211,7 +187,7 @@ namespace Task1
             }
             if (col == "Description")
             {
-                sortedListInstance = new BindingList<Revard>(_revards.OrderBy(x => x.Descripton).ToList());
+                sortedListInstance = new BindingList<Revard>(_revards.OrderBy(x => x.Description).ToList());
                 _revards = sortedListInstance;
             }
             dgvRevards.DataSource = _revards;

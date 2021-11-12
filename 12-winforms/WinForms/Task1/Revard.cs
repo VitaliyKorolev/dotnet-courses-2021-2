@@ -22,7 +22,7 @@ namespace Task1
                 title = value;
             }
         }
-        public string Descripton
+        public string Description
         {
             get { return description; }
             set
@@ -39,7 +39,7 @@ namespace Task1
             ID = count;
 
             Title = title;
-            Descripton = description;
+            Description = description;
         }
     }
 }

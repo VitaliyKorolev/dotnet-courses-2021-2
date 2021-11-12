@@ -73,10 +73,11 @@ namespace Task1
             this.dgvUsers.Location = new System.Drawing.Point(0, 0);
             this.dgvUsers.Name = "dgvUsers";
             this.dgvUsers.RowTemplate.Height = 25;
+            this.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsers.Size = new System.Drawing.Size(732, 281);
             this.dgvUsers.TabIndex = 0;
             this.dgvUsers.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvUsers_ColumnHeaderMouseDoubleClick);
-            this.dgvUsers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_RowEnter);
+            
             // 
             // tabPage2
             // 
@@ -98,10 +99,11 @@ namespace Task1
             this.dgvRevards.Location = new System.Drawing.Point(-4, 3);
             this.dgvRevards.Name = "dgvRevards";
             this.dgvRevards.RowTemplate.Height = 25;
+            this.dgvRevards.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRevards.Size = new System.Drawing.Size(733, 278);
             this.dgvRevards.TabIndex = 1;
             this.dgvRevards.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRevards_ColumnHeaderMouseDoubleClick);
-            this.dgvRevards.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReavards_RowEnter);
+            
             // 
             // btnEdit
             // 

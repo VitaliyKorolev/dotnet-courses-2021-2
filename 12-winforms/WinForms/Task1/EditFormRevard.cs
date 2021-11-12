@@ -10,23 +10,20 @@ namespace Task1
 {
     public partial class EditFormRevard : Form
     {
-        private string mode;
 
         public Revard revard;
        
-        public EditFormRevard(string mode)
+        public EditFormRevard()
         {
             InitializeComponent();
-            this.mode = mode;
+           
         }
-        public EditFormRevard(Revard revard, string mode)
+        public EditFormRevard(Revard revard):this()
         {
-            InitializeComponent();
-            this.mode = mode;
             this.revard = revard;
 
             tbTitle.Text = revard.Title;
-            tbDescription.Text = revard.Descripton;
+            tbDescription.Text = revard.Description;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -36,14 +33,14 @@ namespace Task1
                 return;
 
             this.DialogResult = DialogResult.OK;
-            if (mode == "Add")
+            if (revard == null)            //&&&&&&&&???????????
             {
                 revard = new Revard(tbTitle.Text, tbDescription.Text);
             }
-            if (mode == "Edit")
+            if (revard != null)
             {
                 this.revard.Title = tbTitle.Text;
-                this.revard.Descripton = tbDescription.Text;
+                this.revard.Description = tbDescription.Text;
             }
             Close();
         }

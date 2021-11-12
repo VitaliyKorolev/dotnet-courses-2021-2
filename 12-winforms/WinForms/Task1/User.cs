@@ -23,7 +23,7 @@ namespace Task1
             }
         }
         public IList<Revard> Rev { get;  set; }
-        public string Revards
+        public string RevardsAsString
         {
             get
             {

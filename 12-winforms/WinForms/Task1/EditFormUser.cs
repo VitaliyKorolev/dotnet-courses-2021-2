@@ -10,14 +10,11 @@ namespace Task1
 {
     public partial class EditFormUser : Form
     {
-        private string mode;
-
         
         public User user;
-        public EditFormUser(string mode, BindingList<Revard> revards)
+        public EditFormUser( BindingList<Revard> revards)
         {
             InitializeComponent();
-            this.mode = mode;
             
 
             listBox1.SelectionMode = SelectionMode.MultiSimple;
@@ -25,24 +22,13 @@ namespace Task1
             listBox1.DisplayMember = "Title";
             listBox1.ValueMember = "ID";
 
-
         }
-        public EditFormUser(string mode, BindingList<Revard> revards, User user)
+        public EditFormUser( BindingList<Revard> revards, User user) :this( revards)
         {
-            InitializeComponent();
-            this.mode = mode;
             this.user = user;
-
             tbName.Text = user.Name;
             tbLastName.Text = user.LastName;
             dateTimePicker1.Value = user.BirthDate;
-
-            listBox1.SelectionMode = SelectionMode.MultiSimple;
-            listBox1.DataSource = revards;
-            listBox1.DisplayMember = "Title";
-            
-
-
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -52,7 +38,7 @@ namespace Task1
                 return;
 
             this.DialogResult = DialogResult.OK;
-            if (mode == "Add")
+            if (user == null)
             {
                 user = new User(DateTime.Parse(dateTimePicker1.Text), tbName.Text, tbLastName.Text);
                 var r =listBox1.SelectedItems;
@@ -63,7 +49,7 @@ namespace Task1
 
                 }
             }
-            if (mode == "Edit")
+            if (user != null)
             {
                 this.user.Name = tbName.Text;
                 this.user.LastName = tbLastName.Text;
@@ -95,7 +81,7 @@ namespace Task1
         {
             if (String.IsNullOrEmpty(tbLastName.Text) || tbLastName.Text.Length > 50)
             {
-                errorProvider1.SetError(tbLastName, "Wrong name");
+                errorProvider1.SetError(tbLastName, "Wrong last name");
                 e.Cancel = true;
             }
             else
