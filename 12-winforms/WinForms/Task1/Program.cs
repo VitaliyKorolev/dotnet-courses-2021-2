@@ -1,3 +1,5 @@
+using DAL;
+using BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,12 @@ namespace Task1
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            var userDAO = new UserListDAO();
+            var rewardDAO = new RewardListDAO();
+            var userLogic = new UserManager(userDAO);
+            var rewardLogic = new RewardManager(rewardDAO, userDAO);
+            Application.Run(new MainForm(userLogic, rewardLogic));
         }
     }
 }

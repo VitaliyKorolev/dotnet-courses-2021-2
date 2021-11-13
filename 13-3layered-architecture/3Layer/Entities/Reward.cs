@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Task1
+namespace Entities
 {
-    public class Revard
+    public class Reward
     {
         private static int count = 0;
         public int ID { get; private set; }
@@ -17,7 +15,7 @@ namespace Task1
             {
                 if (String.IsNullOrEmpty(value))
                     throw new ArgumentException("Неверное наименование награды");
-                if (value.Length>50)
+                if (value.Length > 50)
                     throw new ArgumentException("Наименование награды должно быть короче 50 символов");
                 title = value;
             }
@@ -32,8 +30,8 @@ namespace Task1
                 description = value;
             }
         }
-       
-        public Revard( string title, string description)
+
+        public Reward(string title, string description)
         {
             count++;
             ID = count;

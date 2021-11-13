@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,35 +8,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BLL;
+using Interfaces;
 
 namespace Task1
 {
     public partial class MainForm : Form
     {
+        private IUserBL userBL;
+        private IRewardBL rewardBL;
 
-        protected BindingList<User> _users = new BindingList<User>
-        {
-            new User( DateTime.Now.Date.AddYears(-10), "Andrey", "Gysev"),
-            new User( DateTime.Now.Date.AddYears(-15), "Vanya", "Pavlov"),
-
-
-        };
-
-        protected BindingList<Revard> _revards = new BindingList<Revard>
-        {
-            new Revard("Darvin premy", "Biology"),
-            new Revard("Nobel premy", "Physics")
-
-        };
-        public MainForm()
+        public MainForm(IUserBL userBL, IRewardBL rewardBL )
         {
             InitializeComponent();
-            
-            _revards.AllowEdit = true;
-            _users.AllowEdit = true;
 
-            dgvUsers.DataSource = _users;
-            dgvRevards.DataSource = _revards;
+            this.userBL = userBL;
+            this.rewardBL = rewardBL;
+
+            RefreshGrid();
 
             dgvUsers.Columns[5].Visible = false;
             dgvRevards.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -50,17 +40,19 @@ namespace Task1
         {
             if (tabControl1.SelectedTab == tabPage2)
             {
-                Revard item = (Revard)dgvRevards.SelectedRows[0].DataBoundItem;     
-                EditFormRevard editFormRevard = new EditFormRevard(item);
+                Reward item = (Reward)dgvRevards.SelectedRows[0].DataBoundItem;     
+                EditFormRevard editFormRevard = new EditFormRevard( item);
                 editFormRevard.ShowDialog();
-                _revards.ResetBindings();
+
+                RefreshGrid();
             }
             else if(tabControl1.SelectedTab == tabPage1)
             {
                 User item = (User)dgvUsers.SelectedRows[0].DataBoundItem;
-                EditFormUser editFormUser = new EditFormUser( _revards, item);
+                EditFormUser editFormUser = new EditFormUser(userBL, rewardBL.GetAllRewards(), item);
                 editFormUser.ShowDialog();
-                _revards.ResetBindings();
+
+                RefreshGrid();
             }
             
         }
@@ -76,29 +68,26 @@ namespace Task1
 
                 if (deleteForm.DialogResult == DialogResult.OK)
                 {
-                    Revard r = (Revard)dgvRevards.SelectedRows[0].DataBoundItem;          
-                    dgvRevards.Rows.Remove(dgvRevards.SelectedRows[0]);
+                    Reward r = (Reward)dgvRevards.SelectedRows[0].DataBoundItem;
+                    rewardBL.DeleteReward(r);
 
-                    foreach (User u in _users)
-                    {
-                        u.Rev.Remove(r);
-                    }
-
-                    _users.ResetBindings();
-                    _revards.ResetBindings();
+                    RefreshGrid();
                 }
             }
             else if (tabControl1.SelectedTab == tabPage1)
-            {        
+            {
                 DeleteForm deleteForm = new DeleteForm();
                 deleteForm.ShowDialog();
 
                 if (deleteForm.DialogResult == DialogResult.OK)
                 {
-                    dgvUsers.Rows.Remove(dgvUsers.SelectedRows[0]);
-                    _users.ResetBindings();
+                    User u = (User)dgvUsers.SelectedRows[0].DataBoundItem;
+                    userBL.DeleteUser(u);
+
+                    RefreshGrid();
                 }
             }
+            
 
 
         }
@@ -111,86 +100,129 @@ namespace Task1
                 editFormRevard.ShowDialog();
                 if (editFormRevard.DialogResult == DialogResult.OK)
                 {
-                    _revards.Add(editFormRevard.revard);
-                    _revards.ResetBindings();
+                    rewardBL.AddReward(editFormRevard.revard);
+                    RefreshGrid();
                 }
 
             }
             else if (tabControl1.SelectedTab == tabPage1)
             {
-                EditFormUser editFormUser = new EditFormUser( _revards);
+                EditFormUser editFormUser = new EditFormUser(userBL, rewardBL.GetAllRewards());
                 editFormUser.ShowDialog();
 
                 if (editFormUser.DialogResult == DialogResult.OK)
                 {
-                    _users.Add(editFormUser.user);
-                    _users.ResetBindings();
+                    userBL.AddUser(editFormUser.user);
+                    RefreshGrid();
                 }
 
 
             }
 
         }
+        private void RefreshGrid()
+        {
+            dgvRevards.DataSource = rewardBL.GetAllRewards();
+            dgvUsers.DataSource = userBL.GetAllUsers();
+        }
 
         private void dgvUsers_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            BindingList<User> sortedListInstance;
+            IList<User> sortedListInstance;
             string col = dgvUsers.Columns[e.ColumnIndex].DataPropertyName;
+            IList<User> users = userBL.GetAllUsers();
             if (col == "ID")
             {
-                 sortedListInstance = new BindingList<User>(_users.OrderBy(x => x.ID).ToList());
-                _users = sortedListInstance;
+                sortedListInstance = new List<User>(users.OrderBy(x => x.ID).ToList());
+                users = sortedListInstance;
             }
             if (col == "Name")
             {
-                 sortedListInstance = new BindingList<User>(_users.OrderBy(x => x.Name).ToList());
-                _users = sortedListInstance;
+                sortedListInstance = new List<User>(users.OrderBy(x => x.Name).ToList());
+                users = sortedListInstance;
             }
             if (col == "LastName")
             {
-                 sortedListInstance = new BindingList<User>(_users.OrderBy(x => x.LastName).ToList());
-                _users = sortedListInstance;
+                sortedListInstance = new List<User>(users.OrderBy(x => x.LastName).ToList());
+                users = sortedListInstance;
             }
             if (col == "BirthDate")
             {
-                 sortedListInstance = new BindingList<User>(_users.OrderBy(x => x.BirthDate).ToList());
-                _users = sortedListInstance;
+                sortedListInstance = new List<User>(users.OrderBy(x => x.BirthDate).ToList());
+                users = sortedListInstance;
             }
             if (col == "Age")
             {
-                 sortedListInstance = new BindingList<User>(_users.OrderBy(x => x.Age).ToList());
-                _users = sortedListInstance;
+                sortedListInstance = new List<User>(users.OrderBy(x => x.Age).ToList());
+                users = sortedListInstance;
             }
             if (col == "Revards")
             {
-                sortedListInstance = new BindingList<User>(_users.OrderBy(x => x.RevardsAsString).ToList());
-                _users = sortedListInstance;
+                sortedListInstance = new List<User>(users.OrderBy(x => x.RewardsAsString).ToList());
+                users = sortedListInstance;
             }
-            dgvUsers.DataSource = _users;
-
+            dgvUsers.DataSource = users;
 
         }
 
         private void dgvRevards_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            BindingList<Revard> sortedListInstance;
+            IList<Reward> sortedListInstance;
             string col = dgvRevards.Columns[e.ColumnIndex].DataPropertyName;
+            IList<Reward> rewards = rewardBL.GetAllRewards();
             if (col == "ID")
             {
-                sortedListInstance = new BindingList<Revard>(_revards.OrderBy(x => x.ID).ToList());
-                _revards = sortedListInstance;
+                sortedListInstance = new List<Reward>(rewards.OrderBy(x => x.ID).ToList());
+                rewards = sortedListInstance;
             }
             if (col == "Title")
             {
-                sortedListInstance = new BindingList<Revard>(_revards.OrderBy(x => x.Title).ToList());
-                _revards = sortedListInstance;
+                sortedListInstance = new List<Reward>(rewards.OrderBy(x => x.Title).ToList());
+                rewards = sortedListInstance;
             }
             if (col == "Description")
             {
-                sortedListInstance = new BindingList<Revard>(_revards.OrderBy(x => x.Description).ToList());
-                _revards = sortedListInstance;
+                sortedListInstance = new List<Reward>(rewards.OrderBy(x => x.Description).ToList());
+                rewards = sortedListInstance;
             }
-            dgvRevards.DataSource = _revards;
+            dgvRevards.DataSource = rewards;
+        }
+
+
+        private void dgvUsers_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvUsers.SelectedRows.Count != 0)
+            {
+                btnDelete.Enabled = true;
+                btnEdit.Enabled = true;
+            }
+        }
+
+        private void dgvRevards_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvRevards.SelectedRows.Count != 0)
+            {
+                btnDelete.Enabled = true;
+                btnEdit.Enabled = true;
+            }
+        }
+
+        private void dgvUsers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            if ( dgvUsers.Rows.Count == 0)
+            {
+                btnDelete.Enabled = false;
+                btnEdit.Enabled = false;
+            }
+        }
+
+        private void dgvRevards_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            if (dgvRevards.Rows.Count == 0)
+            {
+                btnDelete.Enabled = false;
+                btnEdit.Enabled = false;
+            }
         }
     }
 }

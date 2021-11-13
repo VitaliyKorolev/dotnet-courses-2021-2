@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\13-3layered-architecture\3Layer\Entities\Entities.csproj" />
+    <ProjectReference Include="..\..\..\13-3layered-architecture\3Layer\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\13-3layered-architecture\3Layer\Task1\BLL.csproj" />
+  </ItemGroup>
+
+</Project>

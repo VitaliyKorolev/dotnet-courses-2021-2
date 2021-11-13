@@ -5,20 +5,22 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Entities;
+using Interfaces;
 
 namespace Task1
 {
     public partial class EditFormRevard : Form
     {
-
-        public Revard revard;
+       
+        public Reward revard;
        
         public EditFormRevard()
         {
             InitializeComponent();
-           
+            
         }
-        public EditFormRevard(Revard revard):this()
+        public EditFormRevard(Reward revard):this()
         {
             this.revard = revard;
 
@@ -33,11 +35,11 @@ namespace Task1
                 return;
 
             this.DialogResult = DialogResult.OK;
-            if (revard == null)            //&&&&&&&&???????????
+            if (revard == null)            
             {
-                revard = new Revard(tbTitle.Text, tbDescription.Text);
+                revard = new Reward(tbTitle.Text, tbDescription.Text);
             }
-            if (revard != null)
+            else
             {
                 this.revard.Title = tbTitle.Text;
                 this.revard.Description = tbDescription.Text;

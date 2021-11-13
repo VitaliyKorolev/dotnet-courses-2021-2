@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text;
 
-namespace Task1
+namespace Entities
 {
     public class User
     {
         private static int count = 0;
         public int ID { get; set; }
-        public string Name { get;  set; }
-        public string LastName { get;  set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public int Age
         {
@@ -22,21 +21,21 @@ namespace Task1
                 return age;
             }
         }
-        public IList<Revard> Rev { get;  set; }
-        public string RevardsAsString
+        public IList<Reward> Rewards { get; set; }
+        public string RewardsAsString
         {
             get
             {
-                string[] str = new string[Rev.Count];
-                for(int i=0; i<Rev.Count; i++)
+                string[] str = new string[Rewards.Count];
+                for (int i = 0; i < Rewards.Count; i++)
                 {
-                    str[i] = Rev[i].Title;
+                    str[i] = Rewards[i].Title;
                 }
                 string s = String.Join(", ", str);
                 return s;
             }
         }
-        public User( DateTime date, string name, string lastname)
+        public User(DateTime date, string name, string lastname)
         {
             BirthDate = date;
             if (date > DateTime.Now.Date || this.Age > 150) { throw new Exception("Недопустимая дата рождения"); }
@@ -49,11 +48,11 @@ namespace Task1
             count++;
             ID = count;
 
-            Rev = new BindingList<Revard>();
-            
+            Rewards = new List<Reward>();
+
             Name = name;
             LastName = lastname;
-            
+
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entities;
+using Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,20 +12,21 @@ namespace Task1
 {
     public partial class EditFormUser : Form
     {
-        
+        private IUserBL userBL;
         public User user;
-        public EditFormUser( BindingList<Revard> revards)
+        public EditFormUser(IUserBL userBL, IList<Reward> rewards)
         {
             InitializeComponent();
-            
+
+            this.userBL = userBL;
 
             listBox1.SelectionMode = SelectionMode.MultiSimple;
-            listBox1.DataSource = revards;
+            listBox1.DataSource = rewards;
             listBox1.DisplayMember = "Title";
             listBox1.ValueMember = "ID";
 
         }
-        public EditFormUser( BindingList<Revard> revards, User user) :this( revards)
+        public EditFormUser(IUserBL userBL, IList<Reward> rewards, User user) :this(userBL, rewards)
         {
             this.user = user;
             tbName.Text = user.Name;
@@ -42,23 +45,25 @@ namespace Task1
             {
                 user = new User(DateTime.Parse(dateTimePicker1.Text), tbName.Text, tbLastName.Text);
                 var r =listBox1.SelectedItems;
-                foreach(Revard el in r)
+                foreach(Reward el in r)
                 {
-                    if(!user.Rev.Contains(el)) 
-                        user.Rev.Add(el);
+                    userBL.AddRevardToUser(user, el);
+                    //if(!user.Rewards.Contains(el)) 
+                    //    user.Rewards.Add(el);
 
                 }
             }
-            if (user != null)
+            else 
             {
                 this.user.Name = tbName.Text;
                 this.user.LastName = tbLastName.Text;
                 this.user.BirthDate = dateTimePicker1.Value;
                 var r = listBox1.SelectedItems;
-                this.user.Rev.Clear();
-                foreach (Revard el in r)
+                this.user.Rewards.Clear();
+                foreach (Reward el in r)
                 {
-                    user.Rev.Add(el);
+                    //user.Rewards.Add(el);
+                    userBL.AddRevardToUser(user, el);
                 }
             }
             Close();
