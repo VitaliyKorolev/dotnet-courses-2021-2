@@ -101,6 +101,7 @@ namespace Task1
                 if (editFormRevard.DialogResult == DialogResult.OK)
                 {
                     rewardBL.AddReward(editFormRevard.revard);
+
                     RefreshGrid();
                 }
 
