@@ -2,28 +2,30 @@
 DROP TABLE Rewards
 
 CREATE TABLE Rewards (
- Id INT PRIMARY KEY,
- Title NVARCHAR(50),
- Description NVARCHAR(250) NULL,
+ Id INT PRIMARY KEY IDENTITY(1,1),
+ Title NVARCHAR(50) NOT NULL ,
+ Description NVARCHAR(250) ,
 )
 
 DROP TABLE Users
 
 CREATE TABLE Users (
- Id INT PRIMARY KEY,
- Name NVARCHAR(50),
- LastName NVARCHAR(50),
- Birthday DATE,
- Age INT NULL,
+ Id INT PRIMARY KEY IDENTITY(1,1),
+ Name NVARCHAR(50) NOT NULL,
+ LastName NVARCHAR(50) NOT NULL,
+ Birthday DATE NOT NULL
+ 
 )
 
 CREATE TABLE UsersRewards(
- UserId INT,
- RewardId INT,
+ UserId INT NOT NULL,
+ RewardId INT NOT NULL,
  PRIMARY KEY(UserId, RewardId),
- FOREIGN KEY(UserId) REFERENCES Users(Id),
+ FOREIGN KEY(UserId) REFERENCES Users(Id) ,
  FOREIGN KEY(RewardId) REFERENCES Rewards(Id),
 )
 
 INSERT UsersRewards(UserId, RewardId) VALUES(2,2)
 INSERT UsersRewards(UserId, RewardId) VALUES(2,1)
+
+USE MyDatabase
