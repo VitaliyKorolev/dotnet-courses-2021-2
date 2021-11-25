@@ -44,26 +44,32 @@ namespace Task1
             if (user == null)
             {
                 user = new User(DateTime.Parse(dateTimePicker1.Text), tbName.Text, tbLastName.Text);
+               
                 var r =listBox1.SelectedItems;
                 foreach(Reward el in r)
                 {
-                    userBL.AddRevardToUser(user, el);
-                    //if(!user.Rewards.Contains(el)) 
-                    //    user.Rewards.Add(el);
+
+                    if (!user.Rewards.Contains(el))
+                        user.Rewards.Add(el);
 
                 }
+                
             }
             else 
             {
-                this.user.Name = tbName.Text;
-                this.user.LastName = tbLastName.Text;
-                this.user.BirthDate = dateTimePicker1.Value;
+                //this.user.Name = tbName.Text;
+                //this.user.LastName = tbLastName.Text;
+                //this.user.BirthDate = dateTimePicker1.Value;
+                userBL.EditUser(user, tbName.Text, tbLastName.Text, dateTimePicker1.Value);
                 var r = listBox1.SelectedItems;
-                this.user.Rewards.Clear();
+
+                //this.user.Rewards.Clear();
+
+                userBL.DeleteRewardsOfUser(user);
                 foreach (Reward el in r)
                 {
                     //user.Rewards.Add(el);
-                    userBL.AddRevardToUser(user, el);
+                    userBL.AddRewardToUser(user, el);
                 }
             }
             Close();

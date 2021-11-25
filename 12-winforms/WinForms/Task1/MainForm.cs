@@ -41,7 +41,7 @@ namespace Task1
             if (tabControl1.SelectedTab == tabPage2)
             {
                 Reward item = (Reward)dgvRevards.SelectedRows[0].DataBoundItem;     
-                EditFormRevard editFormRevard = new EditFormRevard( item);
+                EditFormRevard editFormRevard = new EditFormRevard(item, rewardBL);
                 editFormRevard.ShowDialog();
 
                 RefreshGrid();

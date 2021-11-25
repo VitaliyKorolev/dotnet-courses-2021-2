@@ -10,27 +10,28 @@ namespace BLL
     public class RewardManager:IRewardBL
     {
         private readonly IRewardDAO _rewardDAO;
-        private readonly IUserDAO _userDAO;
 
-        public RewardManager(IRewardDAO rewardDAO, IUserDAO userDAO)
+        public RewardManager(IRewardDAO rewardDAO)
         {
             _rewardDAO = rewardDAO;
-            _userDAO = userDAO;
+            
         }
-        public void DeleteReward(Reward reward)
-        {
-            _rewardDAO.DeleteReward(reward);
 
-            foreach (var user in _userDAO.GetAllUsers())
-            {
-                user.Rewards.Remove(reward);
-            }
-        }
         public void AddReward(Reward reward)
         {
             _rewardDAO.AddReward(reward);
         }
-       
+
+        public void DeleteReward(Reward reward)
+        {
+            _rewardDAO.DeleteReward(reward);
+        }
+
+        public void EditReward(Reward reward, string newTitle, string newDescriprion)
+        {
+            _rewardDAO.EditReward(reward, newTitle, newDescriprion);
+        }
+
         public IList<Reward> GetAllRewards()
         {
             return _rewardDAO.GetAllRewards();

@@ -54,5 +54,24 @@ namespace Entities
             LastName = lastname;
 
         }
+        public User(int id, DateTime date, string name, string lastname)
+        {
+            BirthDate = date;
+            if (date > DateTime.Now.Date || this.Age > 150) { throw new Exception("Недопустимая дата рождения"); }
+            if (String.IsNullOrEmpty(name))
+                throw new ArgumentException("Неверное имя пользователя");
+
+            if (String.IsNullOrEmpty(lastname))
+                throw new ArgumentException("Неверная фамилия пользователя");
+
+            count = id;
+            ID = id;
+
+            Rewards = new List<Reward>();
+
+            Name = name;
+            LastName = lastname;
+
+        }
     }
 }

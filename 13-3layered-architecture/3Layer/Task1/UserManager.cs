@@ -15,36 +15,35 @@ namespace BLL
         {
             _userDAO = userDAO;
         }
+
+        public void AddRewardToUser(User user, Reward reward)
+        {
+            _userDAO.AddRewardToUser(user, reward);
+        }
+
+        public void AddUser(User user)
+        {
+            _userDAO.AddUser(user);
+        }
+
+        public void DeleteRewardsOfUser(User user)
+        {
+            _userDAO.DeleteRewardsOfUser(user);
+        }
+
         public void DeleteUser(User user)
         {
             _userDAO.DeleteUser(user);
         }
-        public void AddUser(User user)
+
+        public void EditUser(User user, string newName, string newLastName, DateTime newBirthDay)
         {
-           _userDAO.AddUser(user);
+            _userDAO.EditUser(user, newName, newLastName, newBirthDay);
         }
-       
+
         public IList<User> GetAllUsers()
         {
             return _userDAO.GetAllUsers();
         }
-
-        public void AddRevardToUser(User user, Reward reward)
-        {
-            if (!user.Rewards.Contains(reward))
-            {
-                user.Rewards.Add(reward);
-            }
-        }
-        
-        public void DeleteRevardFromUser(User user, Reward reward)
-        {
-            if (user.Rewards.Contains(reward))
-            {
-                user.Rewards.Remove(reward);
-            }
-        }
-      
-
     }
 }

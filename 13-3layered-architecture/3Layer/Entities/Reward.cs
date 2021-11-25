@@ -39,5 +39,13 @@ namespace Entities
             Title = title;
             Description = description;
         }
+        public Reward(int id, string title, string description)
+        {
+            count = id;
+            ID = id;
+            Title = title;
+            Description = description;
+
+        }
     }
 }

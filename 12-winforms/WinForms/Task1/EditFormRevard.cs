@@ -14,15 +14,18 @@ namespace Task1
     {
        
         public Reward revard;
-       
+        private IRewardBL rewardBL;
+
+
         public EditFormRevard()
         {
             InitializeComponent();
             
         }
-        public EditFormRevard(Reward revard):this()
+        public EditFormRevard(Reward revard, IRewardBL rewardBL):this()
         {
             this.revard = revard;
+            this.rewardBL = rewardBL;
 
             tbTitle.Text = revard.Title;
             tbDescription.Text = revard.Description;
@@ -41,8 +44,10 @@ namespace Task1
             }
             else
             {
-                this.revard.Title = tbTitle.Text;
-                this.revard.Description = tbDescription.Text;
+                rewardBL.EditReward(revard, tbTitle.Text, tbDescription.Text);
+                //this.revard.Title = tbTitle.Text;
+                //this.revard.Description = tbDescription.Text;
+
             }
             Close();
         }

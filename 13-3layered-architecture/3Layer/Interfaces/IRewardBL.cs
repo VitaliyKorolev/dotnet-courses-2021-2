@@ -10,6 +10,7 @@ namespace Interfaces
         public void DeleteReward(Reward reward);
         public void AddReward(Reward reward);
         public IList<Reward> GetAllRewards();
-        
+        public void EditReward(Reward reward, string newTitle, string newDescriprion);
+
     }
 }
