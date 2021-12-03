@@ -1,0 +1,38 @@
+﻿@using Entities
+@model IList<Reward>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of rewards</h1>
+
+<table border="1">
+    <tr class="TableHeading">
+        <td>Id</td>
+        <td>Title</td>
+        <td>Description</td>
+    </tr>
+    @foreach (var reward in Model)
+    {
+        <tr>
+            <td>@reward.ID</td>
+            <td>@reward.Title</td>
+            <td>@reward.Description</td>
+            <td class="button-column"><form asp-controller="Rewards" asp-action = "Delete">
+                <input type="hidden" value = "@reward.ID" name="ID"/>
+                <input type="hidden" value = "@reward.Title" name="Title"/>
+                <input type="hidden" value = "@reward.Description" name="Description"/>
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </form></td>
+            <td class="button-column"><form method="Get" asp-controller="Rewards" asp-action = "Edit">
+                <input type="hidden" value = "@reward.ID" name="ID"/>
+                <input type="hidden" value = "@reward.Title" name="Title"/>
+                <input type="hidden" value = "@reward.Description" name="Description"/>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form></td>
+        </tr>
+    }
+</table>
+<form method="Get" asp-controller="Rewards" asp-action = "Add">
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

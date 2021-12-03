@@ -1,0 +1,39 @@
+﻿@using Entities
+@model IList<User>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of Users</h1>
+<table border="1">
+    <tr class="TableHeading">
+        <td>Id</td>
+        <td>Name</td>
+        <td>Last name</td>
+        <td>Birthday</td>
+        <td>Age</td>
+        <td>Revards</td>
+    </tr>
+    @foreach(var user in Model){
+    <tr>
+        <td>@user.ID</td>
+        <td>@user.Name</td>
+        <td>@user.LastName</td>
+        <td >@user.BirthDate.ToShortDateString()</td>
+        <td>@user.Age</td>
+        <td>@user.RewardsAsString</td>
+        <td class="button-column"><form asp-controller="Users" asp-action = "Delete">
+                <input type="hidden" value = "@user.ID" name="id"/>
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </form></td>
+        <td class="button-column"><form method="Get" asp-controller="Users" asp-action = "Edit">
+                <input type="hidden" value = "@user.ID" name="id"/>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form></td>
+    </tr>
+    }
+
+</table>
+<form method="Get" asp-controller="Users" asp-action = "Add">
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

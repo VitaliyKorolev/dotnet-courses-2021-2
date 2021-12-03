@@ -1,0 +1,64 @@
+h1 {
+    color: black;
+    padding: 5%;
+    margin: 0;
+    text-align: center;
+}
+
+.TableHeading {
+    background-color: lightskyblue;
+}
+body {
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    background: url(weather.png) ;
+    
+}
+main{
+    display:flex;
+}
+header {
+    border-bottom: 1px solid;
+    font-size: xx-large;
+    text-align: center;
+    padding: 20px;
+}
+nav {
+    border: 1px solid;
+    border-top: none;
+    border-bottom: none;
+    font-size: x-large;
+    padding: 10px;
+    width: 20%;
+}
+nav li:hover {
+    background-color: lightskyblue;
+    cursor:pointer;
+}
+nav li a{
+    text-decoration:none;
+    color:black;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    padding: 5%;
+    margin: auto;
+    text-align: center;
+    border: none;
+    font-size: 23px;
+}
+td {
+    border: 1px solid ;
+}
+content {
+    text-align: left;
+    padding: 20px;
+    width:80%;
+}
+footer {
+    border: 1px solid;
+    font-size: xx-large;
+    text-align: center;
+}

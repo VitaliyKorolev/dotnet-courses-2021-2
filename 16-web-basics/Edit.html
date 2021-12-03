@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Users list</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+    <header>
+        Welcome to my site
+    </header>
+    <main>
+        <nav>
+            <ul>
+                <li>
+                    <a href="Users.html"> User list</a>
+                </li>
+                <li>
+                    <a href="Rewards.html"> Reward list</a>
+                </li>
+                <li>Edit</li>
+            </ul>
+        </nav>
+        <content>
+            <h1>Edit page</h1>
+            <form name="form1">
+                <h2>User edit</h2>
+                Add new user<input type="checkbox" />
+                <p>
+                    <label for="users">Existing users:</label>
+                    <select name="users">
+                        <option>Leo Dicaprio</option>
+                        <option>Tom Cruz</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="userName">User name:</label>
+                    <input type="text" id="userName" />
+                </p>
+                <p>
+                    <label for="userLastname">User last name:</label>
+                    <input type="text" id="userLastname" />
+                </p>
+                <p>
+                    <label for="userBirthdate">User last name:</label>
+                    <input type="date" id="userBirthdate" />
+                </p>
+                <p>
+                    <label for="rewards">User rewards:</label>
+                    <select name="rewards" multiple>
+                        <option>Oskar</option>
+                        <option>Gremmy</option>
+                        <option>Nobel</option>
+                    </select>
+                </p>
+                <p>
+                    <input type="submit" value="Submit" />
+                    <input type="reset" value="Reset" />
+                </p>
+            </form>
+            <form name="form2">
+                <h2>Reward edit</h2>
+                Add new Reward<input type="checkbox" />
+                <p>
+                    <label for="rewards">Existing rewards:</label>
+                    <select name="rewards">
+                        <option>Oskar</option>
+                        <option>Gremmy</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="rewardTitle">Reward title:</label>
+                    <input type="text" id="rewardTitle" />
+                </p>
+                <p>
+                    <label for="rewardDescription">Reward description:</label>
+                    <input type="text" id="rewardDescription" />
+                </p>
+
+                <p>
+                    <input type="submit" value="Submit" />
+                    <input type="reset" value="Reset" />
+                </p>
+            </form>
+
+        </content>
+    </main>
+</body>
+</html>

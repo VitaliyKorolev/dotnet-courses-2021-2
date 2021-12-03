@@ -57,20 +57,14 @@ namespace Task1
             }
             else 
             {
-                //this.user.Name = tbName.Text;
-                //this.user.LastName = tbLastName.Text;
-                //this.user.BirthDate = dateTimePicker1.Value;
-                userBL.EditUser(user, tbName.Text, tbLastName.Text, dateTimePicker1.Value);
                 var r = listBox1.SelectedItems;
-
-                //this.user.Rewards.Clear();
-
-                userBL.DeleteRewardsOfUser(user);
+                List<Reward> newRewards = new List<Reward>();
                 foreach (Reward el in r)
                 {
-                    //user.Rewards.Add(el);
-                    userBL.AddRewardToUser(user, el);
+                    newRewards.Add(el);
                 }
+                userBL.EditUser(user, tbName.Text, tbLastName.Text, dateTimePicker1.Value, newRewards);
+
             }
             Close();
         }
